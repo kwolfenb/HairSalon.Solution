@@ -75,9 +75,7 @@ namespace HairSalon.Tests
 
       //Act
       List<Client> clientList = new List<Client> {clientOne, clientTwo};
-      Console.WriteLine(clientList.Count);
       List<Client> resultList = Client.GetByStylistId(stylistId);
-      Console.WriteLine(resultList.Count);
 
       //Assert
       CollectionAssert.AreEqual(clientList, resultList);
