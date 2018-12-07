@@ -20,6 +20,22 @@ namespace HairSalon.Models
             _phone = phone;
             _notes = notes;
         }
+        
+        public void SetId(int id)
+        {
+            _id = id;
+        }
+
+//Getters
+        public int GetId()
+        {
+            return _id;
+        }
+
+        public string GetName()
+        {
+            return _name;
+        }
 
         public void Save()
         {
@@ -43,7 +59,44 @@ namespace HairSalon.Models
 
         public static List<Client> GetByStylistId(int stylistId)
         {
-            
+            List<Client> clientList = new List<Client>{};
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM client WHERE stylist_id = @stylistId;";
+            cmd.Parameters.AddWithValue("@stylistId", stylistId);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
+            {
+                int clientId = rdr.GetInt32(0);
+                string clientName = rdr.GetString(1);
+                int stylist_id = rdr.GetInt32(2);
+                string phone = rdr.GetString(3);
+                string notes = rdr.GetString(4);
+                Client newClient = new Client(clientName, stylist_id, phone, notes);
+                newClient.SetId(clientId);
+                clientList.Add(newClient);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+            conn.Dispose();
+            }
+            return clientList;
+        }
+
+        public static void ClearAll()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM clients;";
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if(conn != null)
+            {
+                conn.Dispose();
+            }            
         }
 
         public override bool Equals(System.Object otherClient)
