@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  <h3>Client Profile: </h3>
+  <h5>Name:<strong> @Model["client"].GetName() </strong> </h5>
+  <h5>Phone:<strong> @Model["client"].GetPhone() </strong></h5>
+  <h5>Preferred Stylist:<strong><a href="/stylist/show/@Model["stylist"].GetId()"> @Model["stylist"].GetName() </a> </strong></h5>
+  <h5>Notes: <em> @Model["client"].GetNotes() </em></h5>
+  <br>
+  <br>
+  <h5 class="delete">Click <a href="/client/delete/@Model["client"].GetId()">HERE</a> to remote this client from the database.</h5>
+  <hr>
+
+<h4><a href="/stylist/index">Back to all Stylists.</a></h4>
+<h4><a href="/">Back to Home Page.</href></h4>
+</div>

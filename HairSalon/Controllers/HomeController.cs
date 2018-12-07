@@ -11,5 +11,11 @@ namespace HairSalon.Controllers
         {
             return View();
         }
+
+        [HttpGet("/home/contact")]
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

@@ -29,9 +29,19 @@ namespace HairSalon.Models
             return _id;
         }
 
+        public string GetPhone()
+        {
+            return _phone;
+        }
+
         public string GetName()
         {
             return _name;
+        }
+
+        public string GetPicture()
+        {
+            return _picture;
         }
 
         public void Save()

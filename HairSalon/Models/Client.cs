@@ -38,6 +38,20 @@ namespace HairSalon.Models
             return _name;
         }
 
+        public int GetStylistId()
+        {
+            return _stylistId;
+        }
+
+        public string GetNotes()
+        {
+            return _notes;
+        }
+        public string GetPhone()
+        {
+            return _phone;
+        }
+
         public void Save()
         {
             MySqlConnection conn = DB.Connection();
@@ -56,6 +70,36 @@ namespace HairSalon.Models
             {
                 conn.Dispose();
             }
+        }
+
+        public static Client FindById (int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM clients WHERE id = @clientId;";
+            cmd.Parameters.AddWithValue("@clientId", id);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            string name = "";
+            int stylistId =0;
+            string phone = "";
+            string notes = "";
+
+            while(rdr.Read())
+            {
+                name = rdr.GetString(1);
+                stylistId = rdr.GetInt32(2);
+                phone = rdr.GetString(3);
+                notes = rdr.GetString(4);
+            }
+            Client foundClient = new Client(name, stylistId, phone, notes);
+            foundClient.SetId(id);
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return foundClient;
         }
 
         public static List<Client> GetByStylistId(int stylistId)

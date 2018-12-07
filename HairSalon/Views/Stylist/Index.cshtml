@@ -15,10 +15,10 @@ else
   <ul>
   @foreach(var stylist in @Model)
   {
-    <li>@stylist.GetName()</li>
+    <li><a href="/stylist/show/@stylist.GetId()">@stylist.GetName()</a></li>
   }
   </ul>
-
+  <hr>
   <h4> <a href="/stylist/new">Add a new Stylist.</a></h4>
 }
 
