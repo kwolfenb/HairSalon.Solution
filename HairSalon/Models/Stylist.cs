@@ -119,17 +119,17 @@ namespace HairSalon.Models
                 conn.Dispose();
             }            
         }
-        public override bool Equals(System.Object otherClient)
+        public override bool Equals(System.Object otherStylist)
         {
-            if (!(otherClient is Client))
+            if (!(otherStylist is Stylist))
             {
                 return false;
             }
             else
             {
-                Client newClient = (Client) otherClient;
-                bool areIdsEqual = (this.GetId() == newClient.GetId());
-                bool areDescriptionsEqual = (this.GetName() == newClient.GetName());
+                Stylist newStylist = (Stylist) otherStylist;
+                bool areIdsEqual = (this.GetId() == newStylist.GetId());
+                bool areDescriptionsEqual = (this.GetName() == newStylist.GetName());
                 return (areIdsEqual && areDescriptionsEqual);
             }
         }

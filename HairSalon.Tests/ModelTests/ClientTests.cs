@@ -53,13 +53,11 @@ namespace HairSalon.Tests
       clientTwo.Save();
 
       //Act
-      List<Client> clients = Client.GetAll();
-      Client resultClientOne = clients[0];
-      Client resultClientTwo = clients[1];
+      List<Client> testClients = new List<Client>{clientOne, clientTwo};
+      List<Client> resultClients = Client.GetAll();
       
       //Assert
-      Assert.AreEqual(clientOne, resultClientOne);
-      Assert.AreEqual(clientTwo, resultClientTwo);
+      CollectionAssert.AreEqual(testClients, resultClients);
     }
   }
 }
