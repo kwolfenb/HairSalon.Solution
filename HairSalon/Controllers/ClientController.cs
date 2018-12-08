@@ -13,15 +13,6 @@ namespace HairSalon.Controllers
             return View(clientList);
         }
 
-        // [HttpPost("/client/index")]
-        // public ActionResult Index(string clientName, string clientPhone, int stylistName, string clientNotes)
-        // {
-        //     Client newClient = new Client(clientName, stylistName, clientPhone, clientNotes);
-        //     newClient.Save();
-        //     List<Client> clientList = Client.GetAll();
-        //     return View("Index", clientList);
-        // }
-
         [HttpGet("/client/new")]
         public ActionResult New()
         {
