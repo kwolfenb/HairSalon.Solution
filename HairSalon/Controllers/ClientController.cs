@@ -55,6 +55,11 @@ namespace HairSalon.Controllers
             return View("Show", model);
         }
 
-        [HttpPost("/client/delete/{id}")]
+        [HttpGet("/client/delete/{id}")]
+        public ActionResult Delete(int id)
+        {
+            Client.DeleteById(id);
+            return View();
+        }
     }
 }
