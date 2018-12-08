@@ -1,6 +1,6 @@
 # _Hair Salon Project_
 
-#### _Epicodus Independent Project: A C# application with SQL database that allows users to manage Clients and Stylists for a Hair Salon. 12.06.2018_
+#### _Epicodus Independent Project: A C# application with SQL database that allows users to manage Clients and Stylists for a Hair Salon. 12.07.2018_
 
 #### By _**Kenny Wolfenberger**_
 
@@ -9,6 +9,7 @@
 _A C# application that is connected to a SQL database with tables for Stylists and Clients. Users can add to the Client lists for each individual Stylist. Any time a Client is added, it must be associated with a Stylist. Stylist table includes details such as name, address, phone number and Client list._
 
 ## Setup/Installation Requirements
+
 
 * _Clone this repository: $ git clone https://github.com/kwolfenb/CS-Yelp-Project-SQL.git_
 * _To edit the project, open the project in your preferred text editor._

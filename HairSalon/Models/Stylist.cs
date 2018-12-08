@@ -90,6 +90,37 @@ namespace HairSalon.Models
             return foundStylist;
         }
 
+        public static Stylist Update(int id, string stylistName, string stylistPhone, string stylistPicture)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE stylists SET name=@stylistName, phone=@stylistPhone, picture=@stylistPicture WHERE id = @stylistId;";
+            cmd.Parameters.AddWithValue("@stylistId", id);
+            cmd.Parameters.AddWithValue("@stylistName", stylistName);
+            cmd.Parameters.AddWithValue("@stylistPhone", stylistPhone);
+            cmd.Parameters.AddWithValue("@stylistPhone", stylistPhone);
+            cmd.Parameters.AddWithValue("@stylistPicture", stylistPicture);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            string name = "";
+            string phone = "";
+            string picture = "";
+            while(rdr.Read())
+            {
+                name = rdr.GetString(1);
+                phone = rdr.GetString(2);
+                picture = rdr.GetString(3);
+            }
+            Stylist foundStylist = new Stylist(name, phone, picture);
+            foundStylist.SetId(id);
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return foundStylist;
+        }
+        
         public static List<Stylist> GetAll()
         {
             List<Stylist> allStylists = new List<Stylist>{};
