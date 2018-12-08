@@ -35,7 +35,11 @@ _A C# application that is connected to a SQL database with tables for Stylists a
 | New clients will be linked to stylist table in a one-to-many relationship |
 | Users can delete clients |
 | Users can make updates to existing Stylists |
-
+| Users can see list of all clients |
+| Users can see list of all stylists |
+| Users can see list of clients by specific stylists |
+| Users can view detailed information for specific stylists|
+| Users can view detailed information for specific clients |
 
 
 ## Technologies Used
