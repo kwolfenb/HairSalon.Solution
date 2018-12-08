@@ -1,6 +1,6 @@
 # _Hair Salon Project_
 
-#### _Epicodus Independent Project: A C# application with SQL database that allows users to manage Clients and Stylists for a Hair Salon. 12.07.2018_
+#### _Epicodus Independent Project: C#/.Net week 3. 12.07.2018_
 
 #### By _**Kenny Wolfenberger**_
 
@@ -11,9 +11,14 @@ _A C# application that is connected to a SQL database with tables for Stylists a
 ## Setup/Installation Requirements
 
 
-* _Clone this repository: $ git clone https://github.com/kwolfenb/CS-Yelp-Project-SQL.git_
+* _Clone this repository: $ git clone https://github.com/kwolfenb/HairSalon.Solution.git_
 * _To edit the project, open the project in your preferred text editor._
-* _To run the program, first navigate to the location of the Yelp file then run dotnet restore, dotnet build, and dotnet run._
+* _To create related database, open MySql from terminal. Enter the following commands:_
+* _CREATE DATABASE hair\_salon;_
+* _USE hair\_salon;_
+* _CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255), phone VARCHAR(20), picture VARCHAR(255));_
+* _CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist\_id INT, phone VARCHAR(20), notes TEXT);_
+* _To run the program, first navigate to the location of the HairSalon file then run dotnet restore, dotnet build, and dotnet run._
 * _When program is running open a web browser and go to localhost:5000 to view program._
 * _To run the tests navigate to the Yelp.Tests folder and use these commands: $ dotnet restore and dotnet test._ 
 
@@ -23,10 +28,13 @@ _A C# application that is connected to a SQL database with tables for Stylists a
 
 
 ### Specs
-| Spec | Input | Output |
-| :-------------     | :------------- | :------------- |
-| Program can take new user input for Cuisine types | "Japanese" | List: Japanese  |
-| Program can take new user input for Restaurant types | "Bobo's Grill" | List: Bobo's Grill  |
+| Spec |
+| :-------------  |
+| Program can take new user input for new Stylist |
+| Program can take new user input for new Clients |
+| New clients will be linked to stylist table in a one-to-many relationship |
+| Users can delete clients |
+| Users can make updates to existing Stylists |
 
 
 
