@@ -61,7 +61,7 @@ button{
   width: 50%;
 }
 
-.delete a{
+.delete{
   font-weight: bolder;
   color: red;
 }

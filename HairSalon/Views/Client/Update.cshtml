@@ -1,0 +1,41 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  <h2>Edit Client Profile: @Model["client"].GetName()</h2>
+
+  <h3>Make changes here:</h3>
+    <form action='/client/update/@Model["client"].GetId()' method="post">
+    <div class = "form-group row">
+        <div class="col col-md-3">
+          <label for="clientName">Name: </label>
+          <input class="form-control" id="clientName" name="clientName" type="text" required value='@Model["client"].GetName()'>
+        </div>
+        <div class="col col-md-3">
+          <label for="phone">Phone Number: </label>
+          <input class="form-control" id="phone" name="phone" type="text" value='@Model["stylist"].GetPhone()'>
+        </div>
+      </div>
+      <div class="col col-md-3">
+        <div class="dropdown">
+          <label for="stylistName">Preferred Stylist:</label>
+          <br>
+          <select class="dropdown-select" name="stylistName">
+            @foreach(Stylist stylist in @Model["allStylists"])
+            {
+              <option name="stylistName" value=@stylist.GetId()>@stylist.GetName()</option>
+            }
+          </select>
+        </div>
+        </div>
+      <div class = "form-group row">
+        <button class="btn btn-primary btn-lg" type="submit">Save Changes</button>
+      </div>
+    </form>
+  <br>
+  <hr>
+  <h4><a href='/stylist/show/@Model["stylist"].GetId()'>Discard changes and go back to stylist's profile.</a></h4>
+  <br>
+  <h4 class="delete"><a href='/stylist/delete/@Model["stylist"].GetId()'>Delete this stylist</a></h4>
+  <br>
+</div>

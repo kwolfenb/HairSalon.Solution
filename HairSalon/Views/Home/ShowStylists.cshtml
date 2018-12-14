@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  @if (@Model.Count==0)
+  {
+    <h3 class="delete">All Stylist records have been deleted.</h3>
+  <hr>
+  }
+  else
+  {
+    <h3 class="delete">Warning: The following records will been deleted</h3>
+    <hr>
+    <ul>
+    @foreach(var x in @Model)
+    {
+      <li>@x.GetName()</li>
+    }
+  </ul>
+  <br>
+
+  <h4 class="delete"><a href="/home/delete/stylists/confirm">Click here to proceed with deletion.</a></h4>
+  }
+  <h4><a href="/home/admin">Back to admin page.</a></h4>
+  <hr>
+  <h4><a href="/">Return to homepage.</a></h4>
+</div>

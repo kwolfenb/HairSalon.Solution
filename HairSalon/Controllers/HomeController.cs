@@ -17,5 +17,40 @@ namespace HairSalon.Controllers
         {
             return View();
         }
+
+        [HttpGet("/home/admin")]
+        public ActionResult Admin()
+        {
+            return View();
+        }
+
+        [HttpGet("/home/delete/stylists")]
+        public ActionResult ShowStylists()
+        {
+            List<Stylist>allStylists = Stylist.GetAll();
+            return View(allStylists);
+        }
+
+        [HttpGet("/home/delete/stylists/confirm")]
+        public ActionResult DeleteStylists()
+        {
+            Stylist.DeleteAll();
+            return RedirectToAction("ShowStylists");
+        }
+
+        [HttpGet("/home/delete/clients")]
+        public ActionResult ShowClients()
+        {
+            List<Client>allClients = Client.GetAll();
+            return View(allClients);
+        }
+
+        [HttpGet("/home/delete/clients/confirm")]
+        public ActionResult DeleteClients()
+        {
+            Client.DeleteAll();
+            return RedirectToAction("ShowClients");
+        }
+
     }
 }

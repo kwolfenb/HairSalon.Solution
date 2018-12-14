@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
@@ -46,13 +47,34 @@ namespace HairSalon.Controllers
         }
 
         [HttpPost("/stylist/update/{id}")]
-        public ActionResult Show(int id, string stylistName, string stylistPhone, string stylistPicture, int[] specialty)
+        public ActionResult Show(int id, string stylistName, string stylistPhone, string stylistPicture, List<int> specialty)
         {
             Stylist.Update(id, stylistName, stylistPhone, stylistPicture);
             Stylist currentStylist = Stylist.FindById(id);
+            List<Specialty> currentSpecialties = Stylist.ReturnSpecialtiesByStylist(id);
+            List<Specialty> allSpecialties = Specialty.GetAll();
+            List<int> currentSpecialtiesInt = new List<int>{};
+            List<int> allSpecialtiesInt = new List<int>{};
+//Generates Int list of specialties to compare existing specialties with the new specialties to ensure no duplicates. 
+            foreach(var x in currentSpecialties)
+            {
+                currentSpecialtiesInt.Add(x.GetId());
+            }
+            foreach(var y in allSpecialties)
+            {
+                allSpecialtiesInt.Add(y.GetId());
+            }
             foreach(int selection in specialty)
             {
+                if(currentSpecialtiesInt.Contains(selection)==false)
+                {
                 currentStylist.AddStylistSpecialty(selection, id);
+                }
+            }
+            var nonSpecialties = allSpecialtiesInt.Except(specialty);
+            foreach(int z in nonSpecialties)
+            {
+                Stylist.DeleteStylistSpecialty(z, id);
             }
             return RedirectToAction("Show", id);
         }
@@ -69,6 +91,14 @@ namespace HairSalon.Controllers
             model.Add("stylist", selectedStylist);
             model.Add("stylistSpecialties", stylistSpecialties);
             return View(model);
+        }
+
+        [HttpGet("/stylist/delete/{id}")]
+        public ActionResult Delete(int id)
+        {
+            Stylist stylist = Stylist.FindById(id);
+            stylist.Delete();
+            return View(stylist);
         }
     }
 }
