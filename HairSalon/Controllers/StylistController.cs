@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
@@ -18,7 +19,8 @@ namespace HairSalon.Controllers
         {
             Stylist newStylist = new Stylist(stylistName, stylistPhone, stylistPicture);
             newStylist.Save();
-            newStylist.AddStylistSpecialty(specialtyId);
+            int stylistId = newStylist.GetId();
+            newStylist.AddStylistSpecialty(specialtyId, stylistId);
             List<Stylist> allStylists = Stylist.GetAll();
             return View("Index", allStylists);
         }
@@ -35,9 +37,11 @@ namespace HairSalon.Controllers
         {
             Stylist currentStylist = Stylist.FindById(id);
             List<Client> clientList = Client.GetByStylistId(id);
+            List<Specialty> stylistSpecialties = Stylist.ReturnSpecialtiesByStylist(id);
             Dictionary<string, object> model = new Dictionary<string, object>{};
             model.Add("stylist", currentStylist);
             model.Add("clientList", clientList);
+            model.Add("specialties", stylistSpecialties);
             return View(model);
         }
 
@@ -46,9 +50,9 @@ namespace HairSalon.Controllers
         {
             Stylist.Update(id, stylistName, stylistPhone, stylistPicture);
             Stylist currentStylist = Stylist.FindById(id);
-            foreach(var selection in specialty)
+            foreach(int selection in specialty)
             {
-                currentStylist.AddStylistSpecialty(selection);
+                currentStylist.AddStylistSpecialty(selection, id);
             }
             return RedirectToAction("Show", id);
         }

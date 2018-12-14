@@ -5,6 +5,13 @@
   <h2>Stylist Profile: @Model["stylist"].GetName()</h2>
   <img src="~/img/@(@Model["stylist"].GetPicture() + ".jpg")">
   <h4>Phone: @Model["stylist"].GetPhone()</h4>
+  <h4>Specialties:</h4>
+  <ul>
+    @foreach(var specialty in @Model["specialties"])
+    {
+      <li><a href='/specialty/show/@specialty.GetId()'>@specialty.GetDescription()</a></li>
+    }
+  </ul>
   <h4>Client List: </h4>
   @if(@Model["clientList"].Count == 0)
   {

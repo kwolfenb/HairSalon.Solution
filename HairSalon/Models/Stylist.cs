@@ -91,13 +91,13 @@ namespace HairSalon.Models
             return foundStylist;
         }
 
-        public void AddStylistSpecialty(int specialtyId)
+        public void AddStylistSpecialty(int specialtyId, int stylistId)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"INSERT INTO stylists_specialties(stylist_id, specialty_id) VALUES (@stylistId, @specialtyId);";
-            cmd.Parameters.AddWithValue("@stylistId", this._id);
+            cmd.Parameters.AddWithValue("@stylistId", stylistId);
             cmd.Parameters.AddWithValue("@specialtyId", specialtyId);
 
             cmd.ExecuteNonQuery();
@@ -137,6 +137,33 @@ namespace HairSalon.Models
                 conn.Dispose();
             }
             return allStylists;
+        }
+
+        public static List<Specialty> ReturnSpecialtiesByStylist(int stylistId)
+        {
+            List<Specialty> allSpecialties = new List<Specialty>{};
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT specialties.* FROM stylists
+                JOIN stylists_specialties ON (stylists.id = stylists_specialties.stylist_id)
+                JOIN specialties ON (specialties.id = stylists_specialties.specialty_id)
+                WHERE stylists.id=@stylistId;";
+            cmd.Parameters.AddWithValue("@stylistId", stylistId);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
+            {
+                int id = rdr.GetInt32(0);
+                string description = rdr.GetString(1);
+                Specialty newSpecialty = new Specialty(description, id);
+                allSpecialties.Add(newSpecialty);
+            }
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return allSpecialties;
         }
 
         public static Stylist Update(int id, string stylistName, string stylistPhone, string stylistPicture)
