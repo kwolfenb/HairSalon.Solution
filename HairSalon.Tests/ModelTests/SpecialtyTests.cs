@@ -11,7 +11,7 @@ namespace HairSalon.Tests
   {
     public void Dispose()
     {
-        Client.ClearAll();
+        Specialty.ClearAll();
     }
 
     public SpecialtyTest()
@@ -29,21 +29,47 @@ namespace HairSalon.Tests
     [TestMethod]
     public void GetDescription_ReturnsDescriptionFromSpecialty_Description()
     {
+      //Arrange
       string testDescription = "haircuts";
+
+      //Act
       Specialty testSpecialty = new Specialty(testDescription);
       string result = testSpecialty.GetDescription();
+
+      //Assert
       Assert.AreEqual(testDescription, result);
     }
 
     [TestMethod]
     public void GetId_ReturnsSpecialtyId_Id()
     {
+      //Arrange
       int testId = 5;
+      
+      //Act
       Specialty testSpecialty = new Specialty("description", testId);
       int result = testSpecialty.GetId();
+      
+      //Assert
       Assert.AreEqual(testId, result);
     }
 
+    [TestMethod]
+      public void GetAll_ReturnsListSpecialties_List()
+      {
+        //Arrange
+        Specialty testSpecialtyOne = new Specialty("specialty one");
+        Specialty testSpecialtyTwo = new Specialty("specialty two");
+        testSpecialtyOne.Save();
+        testSpecialtyTwo.Save();
+
+        //Act
+        List<Specialty> testList = new List<Specialty>{testSpecialtyOne, testSpecialtyTwo};
+        List<Specialty> result = Specialty.GetAll();
+
+        //Assert
+        CollectionAssert.AreEqual(testList, result);
+      }
 
   }
 }

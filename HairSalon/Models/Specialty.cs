@@ -42,6 +42,30 @@ namespace HairSalon.Models
             conn.Dispose();
         }
     }
+    
+    public static Specialty FindById(int specialtyId)
+    {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM specialties WHERE id = @specialtyId;";
+        cmd.Parameters.AddWithValue("@specialtyId", specialtyId);
+        MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+        string description = "";
+        int id = 0;
+        while(rdr.Read())
+        {
+            id = rdr.GetInt32(0);
+            description = rdr.GetString(1);
+        }
+        Specialty foundSpecialty = new Specialty(description, id);
+        conn.Close();
+        if (conn != null)
+        {
+            conn.Dispose();
+        }
+        return foundSpecialty;
+    }
 
     public static List<Specialty> GetAll()
     {
@@ -92,6 +116,11 @@ namespace HairSalon.Models
           bool areDescriptionsEqual = (this.GetDescription() == newSpecialty.GetDescription());
           return (areIdsEqual && areDescriptionsEqual);
       }
+    }
+
+    public override int GetHashCode()
+    {
+        return this.GetDescription().GetHashCode();
     }
   }
 }

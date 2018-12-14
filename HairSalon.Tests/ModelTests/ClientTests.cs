@@ -79,7 +79,7 @@ namespace HairSalon.Tests
 
       //Assert
       CollectionAssert.AreEqual(clientList, resultList);
-
     }
+
   }
 }

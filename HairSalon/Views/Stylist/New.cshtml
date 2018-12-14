@@ -7,18 +7,27 @@
 <hr>
 <form action="/stylist/index" method="post">
   <div class = "form-group row">
-      <div class="col col-md-3">
-        <label for="stylistName">Name: </label>
-        <input class="form-control" id="stylistName" name="stylistName" type="text" required>
-      </div>
-      <div class="col col-md-3">
-        <label for="stylistPhone">Phone Number: </label>
-        <input class="form-control" id="stylistPhone" name="stylistPhone" type="text" required>
-      </div>
-      <div class="col col-md-3">
-        <label for="stylistPicture">Picture file name (optional): </label>
-        <input class="form-control" id="stylistPicture" name="stylistPicture" type="text" value="sample_picture">
-      </div>
+    <div class="col col-md-3">
+      <label for="stylistName">Name: </label>
+      <input class="form-control" id="stylistName" name="stylistName" type="text" required>
+    </div>
+    <div class="col col-md-3">
+      <label for="stylistPhone">Phone Number: </label>
+      <input class="form-control" id="stylistPhone" name="stylistPhone" type="text" required>
+    </div>
+    <div class="col col-md-2">
+      <label for="specialty">Specialty: </label>
+      <select name="specialtyId">
+        @foreach(var specialty in @Model)
+        {
+          <option value="@specialty.GetId()">@specialty.GetDescription()</option>
+        }
+      </select>
+    </div>
+    <div class="col col-md-3">
+      <label for="stylistPicture">Picture file name (optional): </label>
+      <input class="form-control" id="stylistPicture" name="stylistPicture" type="text" value="sample_picture">
+    </div>
   </div>
   <div class = "form-group row">
     <button class="btn btn-primary btn-lg" type="submit">Submit</button>

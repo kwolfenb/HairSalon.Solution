@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container">
+<h2>Here are our @Model["specialty"].GetDescription() experts.</h2>
+
+<hr>
+
+@if (@Model["stylists"].Count == 0)
+{
+  <h4>Currently there are no stylists specializing in @Model["specialty"].GetDescription().</h4>
+}
+else
+{
+  <ul>
+  @foreach(var stylist in @Model["stylists"])
+  {
+    <li><a href="/stylist/show/@stylist.GetId()">@stylist.GetName()</a></li>
+  }
+  </ul>
+  <hr>
+}
+
+<h4><a href="/specialty">Back to Specialties</a></h4>
+<h4><a href="/">Back to main page</a></h4>
+</div>
