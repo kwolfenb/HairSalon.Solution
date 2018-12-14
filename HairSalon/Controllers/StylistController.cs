@@ -42,15 +42,15 @@ namespace HairSalon.Controllers
         }
 
         [HttpPost("/stylist/update/{id}")]
-        public ActionResult Show(int id, string stylistName, string stylistPhone, string stylistPicture)
+        public ActionResult Show(int id, string stylistName, string stylistPhone, string stylistPicture, int[] specialty)
         {
             Stylist.Update(id, stylistName, stylistPhone, stylistPicture);
             Stylist currentStylist = Stylist.FindById(id);
-            List<Client> clientList = Client.GetByStylistId(id);
-            Dictionary<string, object> model = new Dictionary<string, object>{};
-            model.Add("stylist", currentStylist);
-            model.Add("clientList", clientList);
-            return View("Show", model);
+            foreach(var selection in specialty)
+            {
+                currentStylist.AddStylistSpecialty(selection);
+            }
+            return RedirectToAction("Show", id);
         }
 
         [HttpGet("/stylist/update/{id}")]
