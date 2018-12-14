@@ -62,9 +62,12 @@ namespace HairSalon.Controllers
         {
             Dictionary<string, object> model = new Dictionary<string,object>{};
             Stylist selectedStylist = Stylist.FindById(id);
+            int stylistId = selectedStylist.GetId();
             List<Specialty> allSpecialties = Specialty.GetAll();
+            List<Specialty> stylistSpecialties = Stylist.ReturnSpecialtiesByStylist(stylistId);
             model.Add("specialties", allSpecialties);
             model.Add("stylist", selectedStylist);
+            model.Add("stylistSpecialties", stylistSpecialties);
             return View(model);
         }
     }

@@ -27,7 +27,14 @@
           <label for="specialty">Specialties: </label><br>
             @foreach(var specialty in @Model["specialties"])
             {
-              <input type="checkbox" name="specialty" value="@specialty.GetId()">@specialty.GetDescription()<br>
+              @if(@Model["stylistSpecialties"].Contains(@specialty))
+              {
+                <input type="checkbox" name="specialty" value="@specialty.GetId()" checked="yes">@specialty.GetDescription()<br>
+              }
+              else
+              {
+                <input type="checkbox" name="specialty" value="@specialty.GetId()">@specialty.GetDescription()<br>
+              }
             }
           
       </div>
