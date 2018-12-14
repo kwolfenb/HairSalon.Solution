@@ -66,6 +66,32 @@ namespace HairSalon.Models
         return allSpecialties;
     }
 
-
+    public static void ClearAll()
+    {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"DELETE FROM specialties;";
+        cmd.ExecuteNonQuery();
+        conn.Close();
+        if(conn != null)
+        {
+            conn.Dispose();
+        }            
+    }
+    public override bool Equals(System.Object otherSpecialty)
+    {
+      if (!(otherSpecialty is Specialty))
+      {
+          return false;
+      }
+      else
+      {
+          Specialty newSpecialty = (Specialty) otherSpecialty;
+          bool areIdsEqual = (this.GetId() == newSpecialty.GetId());
+          bool areDescriptionsEqual = (this.GetDescription() == newSpecialty.GetDescription());
+          return (areIdsEqual && areDescriptionsEqual);
+      }
+    }
   }
 }
