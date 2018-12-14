@@ -12,15 +12,20 @@
 }
 else
 {
-  <ul>
-    <li><h4><u><strong>Name:</strong></u></h4></li>
-  @foreach(var client in @Model)
-  {
-    <li><a href="/client/show/@client.GetId()">@client.GetName()</a></li>
-  }
-  </ul>
-<hr>
-  <h4> <a href="/client/new">Add a new Client.</a></h4>
+  <table>
+    <tr>
+      <th><h4><u>Name:</u></h4></th>
+      <th><h4><u>Phone:</u></h4></th>    
+    </tr>
+    @foreach(var client in @Model)
+    {
+      <tr>
+        <td><a href="/client/show/@client.GetId()">@client.GetName()</a></td>
+        <td>@client.GetPhone()</td>
+      </tr>
+    }
+  </table>
+
 }
 
 <h4><a href="/">Back to main page</a></h4>

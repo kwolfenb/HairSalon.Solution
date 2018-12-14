@@ -65,3 +65,11 @@ button{
   font-weight: bolder;
   color: red;
 }
+
+table {
+  width: 50%;
+}
+
+th, td {
+  padding: 15px;
+}

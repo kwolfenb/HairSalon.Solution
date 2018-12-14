@@ -44,6 +44,7 @@ namespace HairSalon.Models
             return _picture;
         }
 
+
         public void Save()
         {
             MySqlConnection conn = DB.Connection();
