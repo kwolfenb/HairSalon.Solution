@@ -54,6 +54,7 @@ namespace HairSalon.Tests
       Assert.AreEqual(testId, result);
     }
 
+
     [TestMethod]
       public void GetAll_ReturnsListSpecialties_List()
       {
@@ -69,6 +70,24 @@ namespace HairSalon.Tests
 
         //Assert
         CollectionAssert.AreEqual(testList, result);
+      }
+
+      
+    [TestMethod]
+      public void FindById_ReturnSpecialtyById_Specialty()
+      {
+        //Arrange
+        Specialty testSpecialty = new Specialty("description");
+        testSpecialty.Save();
+
+        //Act
+        int resultId = testSpecialty.GetId();
+        Specialty resultSpecialty= Specialty.FindById(resultId);
+        Console.WriteLine(testSpecialty.GetDescription());
+        Console.WriteLine(resultSpecialty.GetDescription());
+        
+        //Assert
+        Assert.AreEqual(testSpecialty, resultSpecialty);
       }
 
   }
