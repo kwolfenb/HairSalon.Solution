@@ -18,6 +18,8 @@ _A C# application that is connected to a SQL database with tables for Stylists a
 * _USE hair\_salon;_
 * _CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255), phone VARCHAR(20), picture VARCHAR(255));_
 * _CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist\_id INT, phone VARCHAR(20), notes TEXT);_
+* _CREATE TABLE specialties (id serial PRIMARY KEY, description VARCHAR(255));_
+* _CREATE TABLE stylists\_specialties (id serial PRIMARY KEY, stylist\_id INT, specialty\_id INT);_
 * _To run the program, first navigate to the location of the HairSalon file then run dotnet restore, dotnet build, and dotnet run._
 * _When program is running open a web browser and go to localhost:5000 to view program._
 * _To run the tests navigate to the Yelp.Tests folder and use these commands: $ dotnet restore and dotnet test._ 
