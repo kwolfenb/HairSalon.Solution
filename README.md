@@ -35,13 +35,18 @@ _A C# application that is connected to a SQL database with tables for Stylists a
 | Program can take new user input for new Stylist |
 | Program can take new user input for new Clients |
 | New clients will be linked to stylist table in a one-to-many relationship |
-| Users can delete clients |
+| Users can delete individual clients |
 | Users can make updates to existing Stylists |
+| Users can make updates to existing Clients |
 | Users can see list of all clients |
 | Users can see list of all stylists |
+| Users can see list of all specialties |
 | Users can see list of clients by specific stylists |
 | Users can view detailed information for specific stylists|
 | Users can view detailed information for specific clients |
+| Users can view stylists by specialties |
+| Users can delete ALL clients |
+| Users can delete ALL stylists |
 
 
 ## Technologies Used
@@ -52,6 +57,9 @@ _A C# application that is connected to a SQL database with tables for Stylists a
 * _MVC_
 * _Razor_
 * _Mono_
+* _SQL_
+* _PhpMyAdmin_
+
 
 ### License
 
