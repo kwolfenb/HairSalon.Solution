@@ -47,9 +47,10 @@ namespace HairSalon.Controllers
         }
 
         [HttpPost("/client/update/{id}")]
-        public ActionResult Show(string clientName, string clientPhone, int stylistName, string clientNotes)
+        public ActionResult Update(int id, string clientName, string phone, string clientNotes)
         {
-            Client.Update();
+            Client.Update(id, clientName, phone, clientNotes);
+            return RedirectToAction("Show", id);
 
         }
 
@@ -60,8 +61,10 @@ namespace HairSalon.Controllers
             Client selectedClient = Client.FindById(id);
             int stylistId = selectedClient.GetStylistId();
             Stylist selectedStylist = Stylist.FindById(stylistId);
+            List<Stylist> allStylists = Stylist.GetAll();
             model.Add("client", selectedClient);
             model.Add("stylist", selectedStylist);
+            model.Add("allStylists", allStylists);
             return View(model);
         }
 

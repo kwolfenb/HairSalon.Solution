@@ -102,6 +102,38 @@ namespace HairSalon.Models
             return foundClient;
         }
 
+        public static Client Update(int id, string clientName, string clientPhone, string clientNotes)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE clients SET name=@clientName, phone=@clientPhone, notes=@clientNotes WHERE id = @clientId;";
+            cmd.Parameters.AddWithValue("@clientId", id);
+            cmd.Parameters.AddWithValue("@clientName", clientName);
+            cmd.Parameters.AddWithValue("@clientPhone", clientPhone);
+            cmd.Parameters.AddWithValue("@clientNotes", clientNotes);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            string name = "";
+            string phone = "";
+            int stylistId = 0;
+            string notes = "";
+            while(rdr.Read())
+            {
+                name = rdr.GetString(1);
+                stylistId = rdr.GetInt32(2);
+                phone = rdr.GetString(3);
+                notes = rdr.GetString(4);
+            }
+            Client foundClient = new Client(name, stylistId, phone, notes);
+            foundClient.SetId(id);
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+            return foundClient;
+        }
+
         public static List<Client> GetByStylistId(int stylistId)
         {
             List<Client> clientList = new List<Client>{};
